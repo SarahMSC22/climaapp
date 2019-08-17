@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ClimaApp</string>
+    <string name="city">São Paulo</string>
+    <string name="degrees">27º</string>
+    <string name="sensation">28º</string>
+    <string name="day">Sábado</string>
+    <string name="date">17/08</string>
+    <string name="hour">16:00</string>
 </resources>
