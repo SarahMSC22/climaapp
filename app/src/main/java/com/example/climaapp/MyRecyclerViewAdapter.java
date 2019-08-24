@@ -16,7 +16,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private List<DailyWeatherItem> mWeatherList;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private ItemClickedListener mClickListener;
 
     // data is passed into the constructor
     MyRecyclerViewAdapter(Context context, List<DailyWeatherItem> myListData) {
@@ -34,11 +34,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     // binds the data to the view and textview in each row
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.myView.setImageResource(mWeatherList.get(position).getImgId());
         holder.myTextView.setText(mWeatherList.get(position).getDescription());
         holder.myTextMax.setText(mWeatherList.get(position).getMax());
         holder.myTextMin.setText(mWeatherList.get(position).getMin());
+        holder.mContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mClickListener.onItemClicked(mWeatherList.get(position));
+
+            }
+        });
     }
 
     // total number of rows
@@ -48,27 +55,28 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView myView;
         TextView myTextView;
         TextView myTextMax;
         TextView myTextMin;
+        View mContainer;
 
         ViewHolder(View itemView) {
             super(itemView);
-            myView = itemView.findViewById(R.id.image_weather);
+            myView = itemView.findViewById(R.id.weather);
             myTextView = itemView.findViewById(R.id.date_text);
             myTextMax = itemView.findViewById(R.id.max_temperature);
             myTextMin = itemView.findViewById(R.id.min_temperature);
+            mContainer = itemView.findViewById(R.id.container);
 
-            itemView.setOnClickListener(this);
         }
 
 
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
+//        @Override
+//        public void onClick(View view) {
+//            if (mClickListener != null) mClickListener.onItemClicked(view, getAdapterPosition());
+//        }
     }
 
     // convenience method for getting data at click position
@@ -77,12 +85,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 //    }
 
     // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickedListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
     // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
+//    public interface ItemClickListener {
+//        void onItemClick(View view, int position);
+//    }
+
+    public interface ItemClickedListener {
+        void onItemClicked(DailyWeatherItem item);
     }
 }

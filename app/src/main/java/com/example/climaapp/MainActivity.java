@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,9 +19,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickedListener {
 
     MyRecyclerViewAdapter adapter;
+    TextView mDayOfWeek;
+    ImageView mWeatherOfDay;
+    TextView mMaximum;
+    TextView mMinimum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
 
         //        getWeather();
 
+        mDayOfWeek = (TextView) findViewById(R.id.day);
+        mWeatherOfDay = (ImageView) findViewById(R.id.weather_image);
+        mMaximum = (TextView) findViewById(R.id.maximum);
+        mMinimum = (TextView) findViewById(R.id.minimum);
 
         // data to populate the RecyclerView with
         List<DailyWeatherItem> myListData = new ArrayList();
@@ -54,10 +64,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " +(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onItemClick(View view, int position) {
+//        Toast.makeText(this, "You clicked " +(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+//    }
 
 
     private void getWeather() {
@@ -83,4 +93,13 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
     }
 
 
+    @Override
+    public void onItemClicked(DailyWeatherItem item) {
+        mDayOfWeek.setText(item.getDescription());
+        mWeatherOfDay.setImageResource(item.getImgId());
+        mMinimum.setText(item.getMin());
+        mMaximum.setText(item.getMax());
+
+
+    }
 }
