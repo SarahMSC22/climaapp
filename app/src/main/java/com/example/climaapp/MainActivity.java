@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewAda
         myListData.add(new DailyWeatherItem("Segunda", R.drawable.cloudy, "30º", "18º"));
         myListData.add(new DailyWeatherItem("Terça", R.drawable.sun, "27º", "15º"));
         myListData.add(new DailyWeatherItem("Quarta", R.drawable.rays, "20º", "13º"));
-        myListData.add(new DailyWeatherItem("Quinta", R.drawable.heavy_rain, "23º", "11º"));
-        myListData.add(new DailyWeatherItem("Sexta", R.drawable.light_rain, "27º", "20º"));
+        myListData.add(new DailyWeatherItem("Quinta", R.drawable.moon, "23º", "11º"));
+        myListData.add(new DailyWeatherItem("Sexta", R.drawable.rain_night, "27º", "20º"));
         myListData.add(new DailyWeatherItem("Sábado", R.drawable.mist, "18º", "11º"));
         myListData.add(new DailyWeatherItem("Domingo", R.drawable.snow, "19º", "9º"));
 

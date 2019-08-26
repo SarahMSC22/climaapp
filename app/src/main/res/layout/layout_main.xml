@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/lightBlue">
+    android:background="@drawable/ic_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/weather_image"
@@ -12,7 +12,7 @@
         android:layout_height="150dp"
         android:layout_marginStart="128dp"
         android:foregroundGravity="center"
-        android:src="@drawable/vector_sun"
+        android:src="@drawable/sun"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hour" />
@@ -108,7 +108,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="145dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

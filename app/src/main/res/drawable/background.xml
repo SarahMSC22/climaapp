@@ -5,7 +5,7 @@
     <item android:drawable="@color/white" />
     <item>
         <bitmap android:src="@drawable/logo_weather_app"
-            android:gravity="center"/>
+            android:gravity="center_vertical"/>
 
     </item>
 
