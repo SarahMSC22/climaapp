@@ -10,16 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
+
+import butterknife.BindView;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
+    private Context mContext;
     private List<DailyWeatherItem> mWeatherList;
     private LayoutInflater mInflater;
     private ItemClickedListener mClickListener;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, List<DailyWeatherItem> myListData) {
+    public MyRecyclerViewAdapter(Context context, List<DailyWeatherItem> myListData) {
+        this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
         this.mWeatherList = myListData;
     }
@@ -35,7 +41,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.myView.setImageResource(mWeatherList.get(position).getImgId());
+        //Biblioteca para carregar imagens
+        Glide.with(mContext)
+                .load(mWeatherList.get(position).getImgId())
+                .into(holder.myView);
+
         holder.myTextView.setText(mWeatherList.get(position).getDescription());
         holder.myTextMax.setText(mWeatherList.get(position).getMax());
         holder.myTextMin.setText(mWeatherList.get(position).getMin());
@@ -56,15 +66,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView myView;
         TextView myTextView;
         TextView myTextMax;
         TextView myTextMin;
         View mContainer;
 
+        @BindView(R.id.weather)
+        ImageView myView;
+
         ViewHolder(View itemView) {
             super(itemView);
-            myView = itemView.findViewById(R.id.weather);
+
+            //TODO utilizar butterKnife
             myTextView = itemView.findViewById(R.id.date_text);
             myTextMax = itemView.findViewById(R.id.max_temperature);
             myTextMin = itemView.findViewById(R.id.min_temperature);
@@ -72,17 +85,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         }
 
-
-//        @Override
-//        public void onClick(View view) {
-//            if (mClickListener != null) mClickListener.onItemClicked(view, getAdapterPosition());
-//        }
     }
-
-    // convenience method for getting data at click position
-//    public String getItem(int id) {
-//        return mWeatherList.get(id);
-//    }
 
     // allows clicks events to be caught
     public void setClickListener(ItemClickedListener itemClickListener) {
@@ -90,10 +93,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
     // parent activity will implement this method to respond to click events
-//    public interface ItemClickListener {
-//        void onItemClick(View view, int position);
-//    }
-
     public interface ItemClickedListener {
         void onItemClicked(DailyWeatherItem item);
     }
