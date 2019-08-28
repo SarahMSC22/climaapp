@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.1"
     defaultConfig {
         applicationId "com.example.climaapp"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -31,7 +31,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1' //Programação reativa
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
     implementation 'com.hannesdorfmann.mosby:mvp:2.0.1' //Arquitetura
-    implementation 'com.jakewharton:butterknife:8.8.1' //Bind de view
+    implementation 'com.jakewharton:butterknife:10.0.0' //Bind de view
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.github.bumptech.glide:glide:4.3.1' //Carrega imagem
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.1'
 
