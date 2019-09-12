@@ -54,9 +54,6 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter>
 
         initRecyclerview();
         getPresenter().getWeatherData();
-
-
-        //TODO aprender como selecionar o primeiro item do recyclerview e mostrar ele quando o app abrir
     }
 
     private void initRecyclerview() {
@@ -89,7 +86,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter>
 
     @Override
     public void onLongClick(DailyWeatherItem item) {
-        Intent intent = (new Intent(MainActivity.this, ChartActivity.class));
+        Intent intent = new Intent(MainActivity.this, ChartActivity.class);
         startActivity(intent);
 
     }
@@ -98,6 +95,6 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter>
     public void showWeatherList(List<DailyWeatherItem> listData) {
         this.myListData.addAll(listData);
         mAdapter.notifyDataSetChanged();
-        recyclerView.findViewHolderForAdapterPosition(0).itemView.performClick();
+        onItemClicked(listData.get(0));
     }
 }
